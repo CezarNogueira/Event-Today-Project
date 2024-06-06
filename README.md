@@ -16,16 +16,7 @@ Destinado para empresas que promovem eventos. <br>
 **react**: "18.2.0"; <br>
 **vite**: "5.1.4". <br>
 
-## Uso
-
-
-
-## Contato
-
-Cezar Nogueira - cezar.junior@ba.estudante.senai.br <br>
-[GitHub](URL do repositório GitHub)
-
-Lista de Tecnologias:
+**Lista de Tecnologias:**
 
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png" width="16"/> - ***Html***
 - <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/css3-512.png" width="16"/> - ***Css***
@@ -35,7 +26,32 @@ Lista de Tecnologias:
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Vitejs-logo.svg/2078px-Vitejs-logo.svg.png" width="16"> - ***Vite***
 - <img src="https://pngimg.com/d/mysql_PNG23.png" width="16"> - ***MySQL***
 
-Lista de Plugins:
+## Uso
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Crie um Evento:
+
+Inicie o software e acesse a seção de criação de eventos.
+Preencha os campos obrigatórios, como nome do evento, data, hora, local, descrição e tipo de ingresso.
+Clique em "Salvar" para criar o evento.<br>
+
+2. Crie Ingressos:
+
+Selecione o evento para o qual deseja criar ingressos.
+Acesse a seção de criação de ingressos.
+Defina o tipo de ingresso (por exemplo, VIP, geral, estudante), preço e quantidade disponível.
+Clique em "Criar" para gerar os ingressos.<br>
+
+3. Vizualizar Ingressos:
+
+Visualize todos os ingressos criados para um evento específico.
+
+4. Registre para adquirir o ingresso:
+
+Acesse o menu de Inscrição para registrar seus dados, nome completo, CPF e idade, evento desejado e adquirir o ingresso de um evento.
+
+
+
+## Contato
+
+**Cezar Nogueira** - cezar.junior@ba.estudante.senai.br <br>
+**[GitHub]** - https://github.com/CezarNogueira/Event-Today-Project
