@@ -1,6 +1,7 @@
 {
+  "type": "module",
   "scripts": {
-    "dev": "node --watch --no-warnings ./routes/server.js"
+    "dev": "node --watch --no-warnings ./src/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
