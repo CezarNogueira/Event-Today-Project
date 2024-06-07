@@ -14,7 +14,11 @@ Destinado para empresas que promovem eventos. <br>
 **@types/react-dom**: "18.2.19"; <br>
 **@vitejs/plugin-react**: "4.2.1"; <br>
 **react**: "18.2.0"; <br>
-**vite**: "5.1.4". <br>
+**vite**: "5.1.4"; <br>
+**cors**: "2.8.5"; <br>
+**express**: "4.19.2"; <br>
+**mysql2**: "3.10.0"; <br>
+**node**: "20.14.0". <br>
 
 **Lista de Tecnologias:**
 
