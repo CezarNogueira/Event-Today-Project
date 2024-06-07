@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "node --watch --no-warnings ./routes/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.0",
+    "node": "^20.14.0"
+  }
+}
