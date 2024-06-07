@@ -28,7 +28,7 @@ Destinado para empresas que promovem eventos. <br>
 - <img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" width="16"> - ***Node.js***
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="16"> - ***React***
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Vitejs-logo.svg/2078px-Vitejs-logo.svg.png" width="16"> - ***Vite***
-- <img src="https://pngimg.com/d/mysql_PNG23.png" width="16"> - ***MySQL***
+- <img src="https://cdn.iconscout.com/icon/free/png-256/free-mysql-3521596-2945040.png?f=webp" width="16"> - ***MySQL***
 
 ## Uso
 
