@@ -8,8 +8,8 @@ function Home ({ setCurrentPage }) {
           <p className="p">Vá para qualquer evento que desejar com a Event Today</p>
         </div>
         <div className="home-buttons">
-            <button className="login-button">Login</button>
-            <button className="registration-button">Cadastro</button>
+            <button onClick={() => setCurrentPage('login')} className="login-button">Login</button>
+            <button onClick={() => setCurrentPage('cadastro')} className="registration-button">Cadastro</button>
         </div>
       </div>
   );

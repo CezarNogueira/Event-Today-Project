@@ -20,7 +20,7 @@
 .text-wrapper {
     color: #303030;
     font-family: 'Franklin Gothic Medium';
-    font-weight: 500;
+    letter-spacing: 0.05em;
     font-size: 4em;
     white-space: nowrap;
 }
