@@ -12,7 +12,7 @@ function App() {
         case 'home':
             return <Home setCurrentPage={setCurrentPage}/>;
         case 'cadastro':
-            return <Cadastro />;
+            return <Cadastro setCurrentPage={setCurrentPage}/>;
     default:
         return <Home setCurrentPage={setCurrentPage}/>;
     }

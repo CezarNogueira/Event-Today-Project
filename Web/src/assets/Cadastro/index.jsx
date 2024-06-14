@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { FaArrowLeft } from "react-icons/fa";
 import './cadastro_module.css'
 
-function Cadastro() {
+function Cadastro({ setCurrentPage }) {
     const [formDados, setFormDados] = useState({
         nome_usuario: '',
         cpf_usuario: '',
@@ -50,6 +51,7 @@ function Cadastro() {
     return (
         <div className="cadastro_container">
             <div className="cadastro_wrapper">
+                <div onClick={() => setCurrentPage('home')} className="back-arrow-box"><FaArrowLeft className="back-arrow" /></div>
                 <div className="form"> 
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">

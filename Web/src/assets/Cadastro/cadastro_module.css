@@ -7,12 +7,33 @@
 }
 
 .cadastro_wrapper {
+    background-color: violet;
     width: 95%;
     max-width: 840px;
     height: 95%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.back-arrow-box {
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    padding: 2% 2%;
+    max-width: 84px;
+    max-height: 84px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-arrow {
+    width: 3vw;
+    height: 3vh;
 }
 
 .title {
