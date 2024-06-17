@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { FaArrowLeft } from "react-icons/fa";
-import './cadastro_module.css'
+import './login_module.css';
 
-function Cadastro({ setCurrentPage }) {
+function Login({ setCurrentPage }) {
     const [formDados, setFormDados] = useState({
-        nome_usuario: '',
-        cpf_usuario: '',
-        idade_usuario: '',
         email_usuario: '',
         senha_usuario: ''
     });
@@ -26,7 +23,7 @@ function Cadastro({ setCurrentPage }) {
 
         try {
             console.log("Dados a serem enviados:", formDados);
-            const response = await fetch('http://localhost:3000/auth/register', {
+            const response = await fetch('http://localhost:3000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,47 +32,34 @@ function Cadastro({ setCurrentPage }) {
             });
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                const errorData = await response.json();
+                throw new Error(errorData.errors ? errorData.errors.map(err => err.msg).join(', ') : 'Erro ao realizar login');
             }
 
             const json = await response.json();
-            console.log(response);
-            console.log(json);
-            setMensagem('Cadastro realizado com sucesso!');
+
+            setMensagem('Login realizado com sucesso!');
+            localStorage.setItem('token', json.token); // Salva o token no localStorage
+            setCurrentPage('dashboard'); // Redireciona para o dashboard ou outra página
         } catch (err) {
             console.error('Erro ao enviar', err);
-            setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
+            setMensagem(err.message);
         }
     };
 
     return (
-        <div className="cadastro_container">
-            <div className="cadastro_wrapper">
+        <div className="login_container">
+            <div className="login_wrapper">
                 <div onClick={() => setCurrentPage('home')} className="back-arrow-box"><FaArrowLeft className="back-arrow" /></div>
                 <div className="form"> 
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">
                             <div className="title">
-                                <h1>CADASTRO</h1>
+                                <h1>LOGIN</h1>
                             </div>
                         </div>
 
                         <div className="input-group">
-                            <div className="input-box">
-                                <label htmlFor="nome_usuario">Nome</label>
-                                <input type="text" name="nome_usuario" value={formDados.nome_usuario} onChange={handleChange} maxLength='250' required/>
-                            </div>
-
-                            <div className="input-box">
-                                <label htmlFor="cpf_usuario">CPF</label>
-                                <input type="text" name="cpf_usuario" value={formDados.cpf_usuario} onChange={handleChange} maxLength='14' required/>
-                            </div>
-
-                            <div className="input-box">
-                                <label htmlFor="idade_usuario">Idade</label>
-                                <input type="text" name="idade_usuario" value={formDados.idade_usuario} onChange={handleChange} maxLength='3' required/>
-                            </div>
-
                             <div className="input-box">
                                 <label htmlFor="email_usuario">E-mail</label>
                                 <input type="text" name="email_usuario" value={formDados.email_usuario} onChange={handleChange} maxLength='200' required/>
@@ -83,13 +67,14 @@ function Cadastro({ setCurrentPage }) {
 
                             <div className="input-box">
                                 <label htmlFor="senha_usuario">Senha</label>
-                                <input type="text" name="senha_usuario" value={formDados.senha_usuario} onChange={handleChange} minLength='6' maxLength='200' required/>
+                                <input type="password" name="senha_usuario" value={formDados.senha_usuario} onChange={handleChange} minLength='6' maxLength='200' required/>
                             </div>
                         </div>
 
                         <div className='confirm-button'>
                             <button type='submit'>Confirmar</button>
                         </div>
+                        {mensagem && <p>{mensagem}</p>}
                     </form>
                 </div>
             </div>
@@ -97,4 +82,4 @@ function Cadastro({ setCurrentPage }) {
     )
 }
 
-export default Cadastro
+export default Login;

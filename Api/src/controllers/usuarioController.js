@@ -108,12 +108,12 @@ export async function login(req, res) {
         // Buscar usuário no banco de dados pelo email
         findByEmail(email_usuario, async (err, rows) => {
             if (err) {
-                res.status(500).send('Erro ao buscar usuário');
+                res.status(500).json({ error: 'Erro ao buscar usuário' });
                 return;
             }
             // Se não encontrar nenhum usuário com o email fornecido, retornar erro de credenciais inválidas
             if (rows.length === 0) {
-                return res.status(400).send('Credenciais inválidas');
+                return res.status(400).json({ error: 'Credenciais inválidas' });
             }
             // Extrair a senha criptografada do usuário encontrado
             const user = rows[0];
@@ -124,12 +124,14 @@ export async function login(req, res) {
 
             // Se as senhas não corresponderem, retornar erro de credenciais inválidas
             if (!senhaCorreta) {
-                return res.status(400).send('Credenciais inválidas');
+                return res.status(400).json({ error: 'Credenciais inválidas' });
             }
 
             if (!isMatch) {
-                return res.status(400).send('Credenciais inválidas');
+                return res.status(400).json({ error: 'Credenciais inválidas' });
             }
+
+            console.log(`Login bem-sucedido para o usuário com email ${email_usuario}`);
 
             // Se as senhas corresponderem, gerar token de autenticação e retornar para o cliente
             const token = jwt.sign({ id: user.idusuario }, 'your_jwt_secret', { expiresIn: '1h' });
@@ -137,6 +139,6 @@ export async function login(req, res) {
         });
     } catch (err) {
         console.error('Erro ao realizar login:', err);
-        res.status(500).send('Erro ao realizar login');
+        res.status(500).json({ error: 'Erro ao realizar login' });
     }
 }
