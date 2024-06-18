@@ -10,6 +10,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+//Rotas
+
 app.get('/ingresso', getAllIngresso);
 app.post('/ingresso', createIngresso);
 app.put('/ingresso/:id', updateIngresso);

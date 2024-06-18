@@ -1,0 +1,131 @@
+.create_container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F2F2;
+}
+
+.create_wrapper {
+    background-color: violet;
+    width: 95%;
+    max-width: 840px;
+    height: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.back-arrow-box {
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    padding: 2% 2%;
+    max-width: 84px;
+    max-height: 84px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-arrow {
+    width: 3vw;
+    height: 3vh;
+}
+
+.title {
+    font-family: 'Franklin Gothic Medium';
+    font-size: 1.5em;
+    letter-spacing: 0.05em;
+}
+
+.form {
+    font-family: 'Segoe UI';
+    width: 100%;
+    max-width: 840px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f2f2f2;
+    padding: 3rem;
+}
+
+.form-header {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0;
+    gap: 0.5rem;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.input-box input {
+    width: 75%;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #0000001c;
+    transition: all 0.4s;
+}
+
+.input-box input:hover {
+    background-color: #eeeeee75;
+}
+
+.input-box input:focus-visible {
+    outline: 1px solid #303030;
+}
+
+.input-box label {
+    width: 70%;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #000000c0;
+}
+
+.confirm-button {
+    margin-top: 3rem;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-button button {
+    font-family: 'Segoe UI';
+    letter-spacing: 0.05em;
+    border: none;
+    background-color: #303030;
+    padding: 3.5% 12%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.confirm-button button:hover {
+    background-color: #101010;
+    color: #fff;
+}

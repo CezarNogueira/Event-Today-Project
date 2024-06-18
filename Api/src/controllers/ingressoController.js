@@ -2,7 +2,7 @@ import { create, read, update, deleteI } from "../models/ingresso.js";
 
 // Realizar INSERT (CREATE)
 export async function createIngresso(req, res) {
-    //nome_ingresso, tipo_ingresso, preco_ingresso, qtd_ingresso, data_ingresso
+    
     const dados = req.body;
 
     // Insersão de Dados

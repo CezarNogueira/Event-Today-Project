@@ -40,6 +40,8 @@ function Login({ setCurrentPage }) {
 
             setMensagem('Login realizado com sucesso!');
             localStorage.setItem('token', json.token); // Salva o token no localStorage
+            localStorage.setItem('nome_usuario', json.nome_usuario); // Salva o Nome de Usuario no localStorage
+            localStorage.setItem('usuario_id', json.idusuario); // Salva o ID do usuário no localStorage
             setCurrentPage('menu');
         } catch (err) {
             console.error('Erro ao enviar', err);

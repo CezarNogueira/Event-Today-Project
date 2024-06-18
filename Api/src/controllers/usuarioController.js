@@ -119,14 +119,7 @@ export async function login(req, res) {
             const user = rows[0];
             const isMatch = await bcrypt.compare(senha_usuario, user.senha_usuario);
 
-            // Comparar a senha fornecida pelo usuário com a senha criptografada do banco de dados
-            const senhaCorreta = await bcrypt.compare(senha_usuario, user.senha_usuario);
-
             // Se as senhas não corresponderem, retornar erro de credenciais inválidas
-            if (!senhaCorreta) {
-                return res.status(400).json({ error: 'Credenciais inválidas' });
-            }
-
             if (!isMatch) {
                 return res.status(400).json({ error: 'Credenciais inválidas' });
             }
@@ -135,7 +128,7 @@ export async function login(req, res) {
 
             // Se as senhas corresponderem, gerar token de autenticação e retornar para o cliente
             const token = jwt.sign({ id: user.idusuario }, 'your_jwt_secret', { expiresIn: '1h' });
-            res.status(200).json({ token });
+            res.status(200).json({ token, nome_usuario: user.nome_usuario });
         });
     } catch (err) {
         console.error('Erro ao realizar login:', err);

@@ -39,9 +39,11 @@ function Cadastro({ setCurrentPage }) {
             }
 
             const json = await response.json();
+            localStorage.setItem('nome_usuario', formDados.nome_usuario);
             console.log(response);
             console.log(json);
             setMensagem('Cadastro realizado com sucesso!');
+            setCurrentPage('login');
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
