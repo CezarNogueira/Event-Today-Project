@@ -3,6 +3,7 @@ import './App.css'
 import Home from './assets/Home';
 import Cadastro from './assets/Cadastro';
 import Login from './assets/Login';
+import Menu from './assets/Menu';
 
 function App() {
   
@@ -16,8 +17,8 @@ function App() {
             return <Cadastro setCurrentPage={setCurrentPage}/>;
         case 'login':
             return <Login setCurrentPage={setCurrentPage}/>;
-        case 'dashboard':
-            return <Dashboard setCurrentPage={setCurrentPage}/>;
+        case 'menu':
+            return <Menu setCurrentPage={setCurrentPage}/>;
     default:
         return <Home setCurrentPage={setCurrentPage}/>;
     }

@@ -1,0 +1,65 @@
+.menu_container {
+    background-color: #f2f2f2;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .menu-wrapper {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .menu-text-wrapper {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'Franklin Gothic Medium';
+    font-size: 1.2em;
+    height: 25vh;
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .menu-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 25vh;
+    width: 80%;
+  }
+  
+  .create-button,
+  .edit-button,
+  .logoff-button {
+    background-color: #303030;
+    color: #ffffff;
+    font-family: 'Segoe UI';
+    font-weight: 600;
+    height: 6vh;
+    width: 50vw;
+    max-width: 240px;
+    border: none; 
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  
+  .create-button:hover,
+  .edit-button:hover {
+    background-color: #101010;
+  }
+
+  .logoff-button {
+    background-color: #c0392b;
+  }
+  
+  .logoff-button:hover {
+    background-color: #97291d;
+  }

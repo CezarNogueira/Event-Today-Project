@@ -40,7 +40,7 @@ function Login({ setCurrentPage }) {
 
             setMensagem('Login realizado com sucesso!');
             localStorage.setItem('token', json.token); // Salva o token no localStorage
-            setCurrentPage('dashboard'); // Redireciona para o dashboard ou outra página
+            setCurrentPage('menu');
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem(err.message);
