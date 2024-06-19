@@ -1,16 +1,16 @@
 .sucess_container {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #F2F2F2;
 }
 
 .sucess_wrapper {
-    background-color: violet;
     width: 95%;
     max-width: 840px;
-    height: 95%;
+    height: 90%;
     display: flex;
     align-items: center;
     justify-content: center;

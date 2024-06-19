@@ -9,7 +9,7 @@
 }
   
 .reception-text {
-    height: 25vh;
+    height: 15vh;
     width: 90vw;
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@
     align-items: center;
     gap: 2rem;
     width: 90vw;
-    height: 25vh;
+    height: 15vh;
 }
   
 .login-button, .registration-button {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FaArrowLeft } from "react-icons/fa";
 import './create_module.css';
+import Navbar from '../Navbar';
 
 function Create({ setCurrentPage }) {
     const [formDados, setFormDados] = useState({
@@ -12,8 +12,6 @@ function Create({ setCurrentPage }) {
     });
 
     const [mensagem, setMensagem] = useState('');
-    const [dadosCriados, setDadosCriados] = useState(null);
-    const [criadoComSucesso, setCriadoComSucesso] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,8 +43,7 @@ function Create({ setCurrentPage }) {
             console.log(json);
 
             setMensagem('Ingresso criado com sucesso!');
-            setCurrentIngresso(json); // Atualiza o estado do ingresso criado
-            setCurrentPage('sucessIngresso'); // Navega para a página de sucesso
+            setCurrentPage('sucessIngresso');
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
@@ -55,8 +52,8 @@ function Create({ setCurrentPage }) {
 
     return (
         <div className="create_container">
+            <Navbar setCurrentPage={setCurrentPage}/>
             <div className="create_wrapper">
-                <div onClick={() => setCurrentPage('menu')} className="back-arrow-box"><FaArrowLeft className="back-arrow" /></div>
                 <div className="form"> 
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">

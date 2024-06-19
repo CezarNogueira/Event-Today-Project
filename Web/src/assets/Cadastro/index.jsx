@@ -53,7 +53,6 @@ function Cadastro({ setCurrentPage }) {
     return (
         <div className="cadastro_container">
             <div className="cadastro_wrapper">
-                <div onClick={() => setCurrentPage('home')} className="back-arrow-box"><FaArrowLeft className="back-arrow" /></div>
                 <div className="form"> 
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">

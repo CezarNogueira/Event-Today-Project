@@ -17,25 +17,6 @@
     position: relative;
 }
 
-.back-arrow-box {
-    position: absolute;
-    top: 10%;
-    left: 8%;
-    padding: 2% 2%;
-    max-width: 84px;
-    max-height: 84px;
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.back-arrow {
-    width: 3vw;
-    height: 3vh;
-}
-
 .title {
     font-family: 'Franklin Gothic Medium';
     font-size: 1.5em;

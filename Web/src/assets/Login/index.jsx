@@ -52,7 +52,6 @@ function Login({ setCurrentPage }) {
     return (
         <div className="login_container">
             <div className="login_wrapper">
-                <div onClick={() => setCurrentPage('home')} className="back-arrow-box"><FaArrowLeft className="back-arrow" /></div>
                 <div className="form"> 
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">
@@ -60,7 +59,6 @@ function Login({ setCurrentPage }) {
                                 <h1>LOGIN</h1>
                             </div>
                         </div>
-
                         <div className="input-group">
                             <div className="input-box">
                                 <label htmlFor="email_usuario">E-mail</label>

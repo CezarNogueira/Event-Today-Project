@@ -12,7 +12,7 @@ function Menu({ setCurrentPage }) {
             <div className="menu-wrapper">
                 <div className='menu-buttons'>
                     <button className='create-button' onClick={() => setCurrentPage('create')}>Criar Ingresso</button>
-                    <button className='edit-button'>Editar Ingressos</button>
+                    <button className='edit-button' onClick={() => setCurrentPage('edit')}>Editar Ingressos</button>
                     <button className='logoff-button' onClick={() => {
                         localStorage.removeItem('nome_usuario');
                         localStorage.removeItem('token');

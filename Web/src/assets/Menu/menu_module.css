@@ -19,7 +19,7 @@
     margin-bottom: 1rem;
     font-family: 'Franklin Gothic Medium';
     font-size: 1.2em;
-    height: 25vh;
+    height: 15vh;
     width: 90vw;
     display: flex;
     flex-direction: column;
@@ -32,7 +32,7 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    height: 25vh;
+    height: 15vh;
     width: 80%;
   }
   
