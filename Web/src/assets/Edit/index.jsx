@@ -7,6 +7,8 @@ function Edit({ setCurrentPage }) {
     //READ
     const [consultarDados, setConsultarDados] = useState([]);
     const [openItems, setOpenItems] = useState({});
+    const [selecionarCard, setSelecionarCard] = useState();
+    const [atualizar, setAtualizar] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,24 +41,28 @@ function Edit({ setCurrentPage }) {
         }))
     };
 
+    const handleClick = (id) => {
+        setSelecionarCard(selecionarCard === id ? null : id);
+    }
+
     const handleDelete = async (e) => {
         e.preventDefault();
-
-        try {
-            console.log('Dados a serem Deletados', formDados.id);
-            const response = await fetch(`http://localhost:3000/ingresso/${formDados.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formDados)
-            });
-
-            const json = await response.json();
-            console.log(response);
-            console.log(json);
-        } catch (err) {
-            console.error('Erro ao enviar', err)
+        if (selecionarCard) {
+            try {
+                const response = await fetch(`http://localhost:3000/ingresso/${selecionarCard}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                });
+                const json = await response.json();
+                console.log(response);
+                console.log(json);
+                setSelecionarCard(null);
+                atualizarTela();
+            } catch (err) {
+                console.log(err);
+            }
         }
     };
 
@@ -98,8 +104,8 @@ function Edit({ setCurrentPage }) {
                 <form className='edit_form' onSubmit={handleSubmit}>
                     <div className='edit-buttons'>
                         <button className='show-button' type='submit'>Exibir</button>
-                        <button className='update-button'>Editar</button>
-                        <button className='delete-button'>Excluir</button>
+                        <button className='update-button' state={selecionarCard}>Editar</button>
+                        <button className='delete-button' onClick={handleDelete}>Excluir</button>
                     </div>
                 </form>
             </div>
