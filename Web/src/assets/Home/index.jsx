@@ -1,19 +1,23 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Atualize a importação
 import './home_module.css';
 
-function Home ({ setCurrentPage }) {
-    return (
-      <div className="home-wrapper">
-        <div className="reception-text">
-          <div className="text-wrapper">EVENT TODAY</div>
-          <p className="p">Vá para qualquer evento que desejar</p>
-        </div>
+function Home() {
+    const navigate = useNavigate(); // Atualize para useNavigate
 
-        <div className="home-buttons">
-            <button onClick={() => setCurrentPage('login')} className="login-button">Login</button>
-            <button onClick={() => setCurrentPage('cadastro')} className="registration-button">Cadastro</button>
+    return (
+        <div className="home-wrapper">
+            <div className="reception-text">
+                <div className="text-wrapper">EVENT TODAY</div>
+                <p className="p">Vá para qualquer evento que desejar</p>
+            </div>
+
+            <div className="home-buttons">
+                <button onClick={() => navigate('/login')} className="login-button">Login</button>
+                <button onClick={() => navigate('/cadastro')} className="registration-button">Cadastro</button>
+            </div>
         </div>
-      </div>
-  );
+    );
 }
 
 export default Home;

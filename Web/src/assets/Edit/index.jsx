@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import './edit_module.css'
+import { useNavigate } from 'react-router-dom'; // Atualize a importação
+import './edit_module.css';
 import Navbar from '../Navbar';
 
-function Edit({ setCurrentPage }) {
-
-    //READ
+function Edit() {
+    const navigate = useNavigate(); // Atualize para useNavigate
     const [consultarDados, setConsultarDados] = useState([]);
     const [openItems, setOpenItems] = useState({});
     const [selecionarCard, setSelecionarCard] = useState();
     const [atualizar, setAtualizar] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
+    const fetchData = async () => {
         try {
             const response = await fetch('http://localhost:3000/ingresso', {
                 method: 'GET',
@@ -22,28 +20,24 @@ function Edit({ setCurrentPage }) {
             });
 
             const data = await response.json();
-            console.log(data)
+            console.log(data);
             setConsultarDados(data);
         } catch (err) {
             console.log('Erro ao Buscar dados do Banco', err);
         }
     };
 
-    const [formDados, setFormDados] = useState({
-        id: ''
-    });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormDados(prevState => ({
             ...prevState,
             [name]: value
-        }))
+        }));
     };
 
     const handleClick = (id) => {
         setSelecionarCard(selecionarCard === id ? null : id);
-    }
+    };
 
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -52,16 +46,16 @@ function Edit({ setCurrentPage }) {
                 const response = await fetch(`http://localhost:3000/ingresso/${selecionarCard}`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-type': 'application/json'
+                        'Content-Type': 'application/json'
                     }
                 });
                 const json = await response.json();
                 console.log(response);
                 console.log(json);
                 setSelecionarCard(null);
-                atualizarTela();
+                fetchData(); // Atualiza a tela após exclusão
             } catch (err) {
-                console.log(err);
+                console.log('Erro ao excluir', err);
             }
         }
     };
@@ -74,12 +68,19 @@ function Edit({ setCurrentPage }) {
     };
 
     useEffect(() => {
-        handleSubmit(); //Busca do BD para carregar o componente
-    }, []); //enviar array vazio para garantir execução unica
+        fetchData(); // Busca do BD para carregar o componente
+    }, []); // Enviar array vazio para garantir execução única
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        if (selecionarCard) {
+            navigate(`/update/${selecionarCard}`); // Atualize para usar navigate
+        }
+    };
 
     return (
         <div className='edit_container'>
-            <Navbar setCurrentPage={setCurrentPage}/>
+            <Navbar />
             <div className='edit_wrapper'>
                 <div className='edit-content'>
                     <ol className='data-table'>
@@ -101,11 +102,11 @@ function Edit({ setCurrentPage }) {
                         ))}
                     </ol>
                 </div>
-                <form className='edit_form' onSubmit={handleSubmit}>
+                <form className='edit_form'>
                     <div className='edit-buttons'>
-                        <button className='show-button' type='submit'>Exibir</button>
-                        <button className='update-button' state={selecionarCard}>Editar</button>
-                        <button className='delete-button' onClick={handleDelete}>Excluir</button>
+                        <button className='show-button' type='button' onClick={fetchData}>Exibir</button>
+                        <button className='update-button' type='button' onClick={handleUpdate}>Editar</button>
+                        <button className='delete-button' type='button' onClick={handleDelete}>Excluir</button>
                     </div>
                 </form>
             </div>

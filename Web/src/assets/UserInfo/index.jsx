@@ -13,7 +13,7 @@ const UserInfo = () => {
 
     return (
         <div>
-            <p>Logado como: {nomeUsuario || 'Usuário'}</p>
+            <p>Logado como: {nomeUsuario || 'Usuario'}</p>
         </div>
     );
 };

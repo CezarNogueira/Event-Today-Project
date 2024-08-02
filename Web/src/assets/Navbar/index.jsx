@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './navbar_module.css';
 import { FaArrowLeft } from "react-icons/fa";
 
-function Navbar ({ setCurrentPage }) {
+function Navbar() {
+    const navigate = useNavigate();
 
-    return ( 
+    const handleBackClick = () => {
+        navigate('/menu');
+    };
+
+    return (
         <header>
             <nav>
-                <div onClick={() => setCurrentPage('menu')} className="back-arrow-box"><FaArrowLeft className="back-arrow" /></div>
+                <div onClick={handleBackClick} className="back-arrow-box">
+                    <FaArrowLeft className="back-arrow" />
+                </div>
                 <div className='nav-text-wrapper'>
                     <h2 className='title'>EVENT TODAY</h2>
                 </div>

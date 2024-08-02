@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Atualize a importação
 import './create_module.css';
 import Navbar from '../Navbar';
 
-function Create({ setCurrentPage }) {
+function Create() {
+    const navigate = useNavigate(); // Atualize para useNavigate
     const [formDados, setFormDados] = useState({
-        nome_ingresso: '',
-        tipo_ingresso: '',
-        preco_ingresso: '',
-        qtd_ingresso: '',
-        data_ingresso: ''
+        event_name: '',
+        event_date: '',
+        event_location: '',
+        event_description: ''
     });
 
     const [mensagem, setMensagem] = useState('');
@@ -26,7 +27,7 @@ function Create({ setCurrentPage }) {
 
         try {
             console.log("Dados a serem enviados:", formDados);
-            const response = await fetch('http://localhost:3000/ingresso', {
+            const response = await fetch('http://localhost:3000/events/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,9 +42,8 @@ function Create({ setCurrentPage }) {
             const json = await response.json();
             console.log(response);
             console.log(json);
-
-            setMensagem('Ingresso criado com sucesso!');
-            setCurrentPage('sucessIngresso');
+            setMensagem('Evento criado com sucesso!');
+            navigate('/menu'); // Atualize para usar navigate
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
@@ -52,50 +52,48 @@ function Create({ setCurrentPage }) {
 
     return (
         <div className="create_container">
-            <Navbar setCurrentPage={setCurrentPage}/>
+            <Navbar />
             <div className="create_wrapper">
                 <div className="form"> 
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">
                             <div className="title">
-                                <h1>CRIAÇÃO DE INGRESSO</h1>
+                                <h1>CRIAR EVENTO</h1>
                             </div>
                         </div>
 
                         <div className="input-group">
                             <div className="input-box">
-                                <label htmlFor="nome_ingresso">Nome</label>
-                                <input type="text" name="nome_ingresso" placeholder='Ex. Show da Cantora X' value={formDados.nome_ingresso} onChange={handleChange} maxLength='250' required/>
+                                <label htmlFor="event_name">Nome do Evento</label>
+                                <input type="text" name="event_name" value={formDados.event_name} onChange={handleChange} maxLength='250' required/>
                             </div>
 
                             <div className="input-box">
-                                <label htmlFor="tipo_ingresso">Tipo</label>
-                                <input type="text" name="tipo_ingresso" placeholder='Ex. Inteira, Meia, Vip' value={formDados.tipo_ingresso} onChange={handleChange} maxLength='100' required/>
+                                <label htmlFor="event_date">Data do Evento</label>
+                                <input type="date" name="event_date" value={formDados.event_date} onChange={handleChange} required/>
                             </div>
 
                             <div className="input-box">
-                                <label htmlFor="preco_ingresso">Preço</label>
-                                <input type="text" name="preco_ingresso" placeholder='Ex. 19,99' value={formDados.preco_ingresso} onChange={handleChange} maxLength='20' required/>
+                                <label htmlFor="event_location">Local do Evento</label>
+                                <input type="text" name="event_location" value={formDados.event_location} onChange={handleChange} maxLength='250' required/>
                             </div>
 
                             <div className="input-box">
-                                <label htmlFor="qtd_ingresso">Quantidade</label>
-                                <input type="number" name="qtd_ingresso" value={formDados.qtd_ingresso} onChange={handleChange} maxLength='20' required/>
-                            </div>
-
-                            <div className="input-box">
-                                <label htmlFor="data_ingresso">Data do Evento</label>
-                                <input type="text" name="data_ingresso" placeholder='Ex. 12/08/2024' value={formDados.data_ingresso} onChange={handleChange} maxLength='10' required/>
+                                <label htmlFor="event_description">Descrição do Evento</label>
+                                <input name="event_description" value={formDados.event_description} onChange={handleChange} maxLength='500' required/>
                             </div>
                         </div>
+
                         <div className='confirm-button'>
-                            <button type='submit'>Criar</button>
+                            <button type='submit'>Confirmar</button>
                         </div>
+
+                        {mensagem && <p className="mensagem">{mensagem}</p>}
                     </form>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Create
+export default Create;

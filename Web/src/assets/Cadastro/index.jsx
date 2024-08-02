@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Atualize a importação
 import { FaArrowLeft } from "react-icons/fa";
-import './cadastro_module.css'
+import './cadastro_module.css';
 
-function Cadastro({ setCurrentPage }) {
+function Cadastro() {
+    const navigate = useNavigate(); // Atualize para useNavigate
     const [formDados, setFormDados] = useState({
         nome_usuario: '',
         cpf_usuario: '',
@@ -43,7 +45,7 @@ function Cadastro({ setCurrentPage }) {
             console.log(response);
             console.log(json);
             setMensagem('Cadastro realizado com sucesso!');
-            setCurrentPage('login');
+            navigate('/login'); // Atualize para usar navigate
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
@@ -95,7 +97,7 @@ function Cadastro({ setCurrentPage }) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Cadastro
+export default Cadastro;

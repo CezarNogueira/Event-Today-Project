@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom'; // Atualize para useNavigate
 import './login_module.css';
 
-function Login({ setCurrentPage }) {
+function Login() {
+    const navigate = useNavigate(); // Atualize para useNavigate
     const [formDados, setFormDados] = useState({
         email_usuario: '',
         senha_usuario: ''
@@ -32,20 +33,22 @@ function Login({ setCurrentPage }) {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.errors ? errorData.errors.map(err => err.msg).join(', ') : 'Erro ao realizar login');
+                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
             }
 
             const json = await response.json();
-
+            localStorage.setItem('token', json.token); // Salva o token
+            localStorage.setItem('nome_usuario', json.nome_usuario); // Salva o nome do usuário
+            console.log("Token salvo:", localStorage.getItem('token'));
+            console.log(response);
+            console.log(json);
             setMensagem('Login realizado com sucesso!');
-            localStorage.setItem('token', json.token); // Salva o token no localStorage
-            localStorage.setItem('nome_usuario', json.nome_usuario); // Salva o Nome de Usuario no localStorage
-            localStorage.setItem('usuario_id', json.idusuario); // Salva o ID do usuário no localStorage
-            setCurrentPage('menu');
+            
+            // Redireciona para a página de menu após login bem-sucedido
+            navigate('/menu'); // Atualize para usar navigate
         } catch (err) {
             console.error('Erro ao enviar', err);
-            setMensagem(err.message);
+            setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
         }
     };
 
@@ -59,27 +62,44 @@ function Login({ setCurrentPage }) {
                                 <h1>LOGIN</h1>
                             </div>
                         </div>
+
                         <div className="input-group">
                             <div className="input-box">
                                 <label htmlFor="email_usuario">E-mail</label>
-                                <input type="text" name="email_usuario" value={formDados.email_usuario} onChange={handleChange} maxLength='200' required/>
+                                <input 
+                                    type="text" 
+                                    name="email_usuario" 
+                                    value={formDados.email_usuario} 
+                                    onChange={handleChange} 
+                                    maxLength='200' 
+                                    required 
+                                />
                             </div>
 
                             <div className="input-box">
                                 <label htmlFor="senha_usuario">Senha</label>
-                                <input type="password" name="senha_usuario" value={formDados.senha_usuario} onChange={handleChange} minLength='6' maxLength='200' required/>
+                                <input 
+                                    type="password" 
+                                    name="senha_usuario" 
+                                    value={formDados.senha_usuario} 
+                                    onChange={handleChange} 
+                                    minLength='6' 
+                                    maxLength='200' 
+                                    required 
+                                />
                             </div>
                         </div>
 
                         <div className='confirm-button'>
                             <button type='submit'>Confirmar</button>
                         </div>
-                        {mensagem && <p>{mensagem}</p>}
+
+                        {mensagem && <p className="mensagem">{mensagem}</p>}
                     </form>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Login;
