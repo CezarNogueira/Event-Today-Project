@@ -6,9 +6,8 @@ import Cadastro from './assets/Cadastro';
 import Login from './assets/Login';
 import Menu from './assets/Menu';
 import Create from './assets/Create';
-import SucessIngresso from './assets/SucessPages/pages/ingresso.jsx';
-import Edit from './assets/Edit/index.jsx';
-import Navbar from './assets/Navbar/index.jsx';
+import SucessIngresso from './assets/Resolver/pages/ingresso.jsx';
+import Control from './assets/Control/index.jsx';
 import PrivateRoute from './assets/routes/PrivateRoute.jsx';
 import { AuthProvider } from './assets/routes/AuthContext.jsx';
 
@@ -23,7 +22,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/cadastro" element={<Cadastro />} />
               <Route path="/create" element={<PrivateRoute element={<Create />} />} />
-              <Route path="/edit" element={<PrivateRoute element={<Edit />} />} />
+              <Route path="/control" element={<PrivateRoute element={<Control />} />} />
               <Route path="/sucess" element={<PrivateRoute element={<SucessIngresso />} />} />
               <Route path="/menu" element={<PrivateRoute element={<Menu />} />} />
             </Routes>

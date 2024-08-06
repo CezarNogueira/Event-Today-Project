@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Atualize a importação
-import { FaArrowLeft } from "react-icons/fa";
 import './cadastro_module.css';
 
 function Cadastro() {

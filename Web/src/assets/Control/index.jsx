@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Atualize a importação
-import './edit_module.css';
+import { useNavigate } from 'react-router-dom';
+import './control_module.css';
 import Navbar from '../Navbar';
 
-function Edit() {
-    const navigate = useNavigate(); // Atualize para useNavigate
+function Control() {
+    const navigate = useNavigate();
     const [consultarDados, setConsultarDados] = useState([]);
     const [openItems, setOpenItems] = useState({});
     const [selecionarCard, setSelecionarCard] = useState();
-    const [atualizar, setAtualizar] = useState(false);
+    const [atualizar, setAtualizar] = useState(true);
 
     const fetchData = async () => {
         try {
@@ -19,28 +19,40 @@ function Edit() {
                 }
             });
 
+            if (!response.ok) {
+                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+            }
+
             const data = await response.json();
-            console.log(data);
+            console.log('Dados recebidos:', data);
             setConsultarDados(data);
         } catch (err) {
             console.log('Erro ao Buscar dados do Banco', err);
         }
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormDados(prevState => ({
+    useEffect(() => {
+        fetchData(); // Chama a função fetchData ao montar o componente
+    }, [atualizar]);
+
+    const atualizarTela = () => {
+        setAtualizar(!atualizar);
+    }
+
+    const toggleItem = (index) => {
+        setOpenItems(prevState => ({
             ...prevState,
-            [name]: value
+            [index]: !prevState[index]
         }));
     };
 
     const handleClick = (id) => {
+        toggleItem(id);
+        console.log("Card clicado:", id);
         setSelecionarCard(selecionarCard === id ? null : id);
     };
 
-    const handleDelete = async (e) => {
-        e.preventDefault();
+    const handleDelete = async () => {
         if (selecionarCard) {
             try {
                 const response = await fetch(`http://localhost:3000/ingresso/${selecionarCard}`, {
@@ -53,28 +65,19 @@ function Edit() {
                 console.log(response);
                 console.log(json);
                 setSelecionarCard(null);
-                fetchData(); // Atualiza a tela após exclusão
+                atualizarTela();
             } catch (err) {
                 console.log('Erro ao excluir', err);
             }
         }
     };
 
-    const toggleItem = (index) => {
-        setOpenItems(prevState => ({
-            ...prevState,
-            [index]: !prevState[index]
-        }));
-    };
-
-    useEffect(() => {
-        fetchData(); // Busca do BD para carregar o componente
-    }, []); // Enviar array vazio para garantir execução única
-
-    const handleUpdate = (e) => {
-        e.preventDefault();
+    const handleEdit = () => {
+        console.log("SelecionarCard:", selecionarCard); // Adicione um log para verificar o cardId selecionado
         if (selecionarCard) {
-            navigate(`/update/${selecionarCard}`); // Atualize para usar navigate
+            navigate('/create', { state: { cardId: selecionarCard } });
+        } else {
+            console.log("Nenhum card selecionado para editar.");
         }
     };
 
@@ -84,12 +87,12 @@ function Edit() {
             <div className='edit_wrapper'>
                 <div className='edit-content'>
                     <ol className='data-table'>
-                        {consultarDados.map((linha, index) => (
-                            <li key={index}>
-                                <div className='accordion' onClick={() => toggleItem(index)}>
-                                    <span>Nome: {linha.nome_ingresso}</span>
+                        {consultarDados.map((linha) => (
+                            <li key={linha.idingresso}>
+                                <div className='accordion' onClick={() => handleClick(linha.idingresso)}>
+                                <span>Nome: {linha.nome_ingresso}</span>
                                 </div>
-                                {openItems[index] && (
+                                {openItems[linha.idingresso] && (
                                     <div className='accordion-content'>
                                         <span>ID: {linha.idingresso}</span>
                                         <span>Tipo: {linha.tipo_ingresso}</span>
@@ -104,8 +107,10 @@ function Edit() {
                 </div>
                 <form className='edit_form'>
                     <div className='edit-buttons'>
-                        <button className='show-button' type='button' onClick={fetchData}>Exibir</button>
-                        <button className='update-button' type='button' onClick={handleUpdate}>Editar</button>
+                        <button className='show-button' type='button'>Exibir</button>
+
+                        <button className='update-button' state={{ cardId: selecionarCard }} type='button' onClick={handleEdit}>Editar</button>
+
                         <button className='delete-button' type='button' onClick={handleDelete}>Excluir</button>
                     </div>
                 </form>
@@ -114,4 +119,4 @@ function Edit() {
     );
 }
 
-export default Edit;
+export default Control;

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Atualize a importação
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './create_module.css';
 import Navbar from '../Navbar';
 
 function Create() {
-    const navigate = useNavigate(); // Atualize para useNavigate
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { cardId } = location.state || {};
+
     const [formDados, setFormDados] = useState({
         event_name: '',
         event_date: '',
@@ -13,6 +16,29 @@ function Create() {
     });
 
     const [mensagem, setMensagem] = useState('');
+
+    useEffect(() => {
+        if (cardId) {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(`http://localhost:3000/events/${cardId}`);
+                    if (!response.ok) {
+                        throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    setFormDados({
+                        event_name: data.event_name,
+                        event_date: data.event_date,
+                        event_location: data.event_location,
+                        event_description: data.event_description
+                    });
+                } catch (err) {
+                    console.log('Erro ao buscar dados do evento', err);
+                }
+            };
+            fetchData();
+        }
+    }, [cardId]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,11 +50,12 @@ function Create() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const method = cardId ? 'PUT' : 'POST';
+        const url = cardId ? `http://localhost:3000/events/${cardId}` : 'http://localhost:3000/events/create';
 
         try {
-            console.log("Dados a serem enviados:", formDados);
-            const response = await fetch('http://localhost:3000/events/create', {
-                method: 'POST',
+            const response = await fetch(url, {
+                method: method,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -40,10 +67,9 @@ function Create() {
             }
 
             const json = await response.json();
-            console.log(response);
             console.log(json);
-            setMensagem('Evento criado com sucesso!');
-            navigate('/menu'); // Atualize para usar navigate
+            setMensagem(cardId ? 'Evento atualizado com sucesso!' : 'Evento criado com sucesso!');
+            navigate('/menu');
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
@@ -58,7 +84,7 @@ function Create() {
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">
                             <div className="title">
-                                <h1>CRIAR EVENTO</h1>
+                                <h1>{cardId ? `Editar Ingresso - ID: ${cardId}` : 'Criar Ingresso'}</h1>
                             </div>
                         </div>
 

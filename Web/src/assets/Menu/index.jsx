@@ -10,8 +10,8 @@ function Menu() {
         navigate('/create'); // Atualize para usar navigate
     };
 
-    const handleEditClick = () => {
-        navigate('/edit'); // Atualize para usar navigate
+    const handleControlClick = () => {
+        navigate('/control'); // Atualize para usar navigate
     };
 
     const handleLogoffClick = () => {
@@ -29,7 +29,7 @@ function Menu() {
             <div className="menu-wrapper">
                 <div className='menu-buttons'>
                     <button className='create-button' onClick={handleCreateClick}>Criar Ingresso</button>
-                    <button className='edit-button' onClick={handleEditClick}>Editar Ingressos</button>
+                    <button className='edit-button' onClick={handleControlClick}>Vizualizar Ingressos</button>
                     <button className='logoff-button' onClick={handleLogoffClick}>Deslogar</button>
                 </div>
             </div>
