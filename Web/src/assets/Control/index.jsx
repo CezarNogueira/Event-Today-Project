@@ -32,7 +32,7 @@ function Control() {
     };
 
     useEffect(() => {
-        fetchData(); // Chama a função fetchData ao montar o componente
+        fetchData();
     }, [atualizar]);
 
     const atualizarTela = () => {
@@ -73,7 +73,7 @@ function Control() {
     };
 
     const handleEdit = () => {
-        console.log("SelecionarCard:", selecionarCard); // Adicione um log para verificar o cardId selecionado
+        console.log("SelecionarCard:", selecionarCard);
         if (selecionarCard) {
             navigate('/create', { state: { cardId: selecionarCard } });
         } else {

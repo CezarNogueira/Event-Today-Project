@@ -11,6 +11,10 @@ function Login() {
 
     const [mensagem, setMensagem] = useState('');
 
+    const handleBackClick = () => {
+        navigate('/');
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormDados(prevState => ({
@@ -90,12 +94,15 @@ function Login() {
                             </div>
                         </div>
 
-                        <div className='confirm-button'>
+                        <div className='confirm-button-login'>
                             <button type='submit'>Confirmar</button>
                         </div>
 
                         {mensagem && <p className="mensagem">{mensagem}</p>}
                     </form>
+                    <div className='back-button-login'>
+                        <button onClick={handleBackClick}>Voltar</button>
+                    </div>
                 </div>
             </div>
         </div>

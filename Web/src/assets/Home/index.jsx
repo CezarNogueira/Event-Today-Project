@@ -1,9 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Atualize a importação
+import { useNavigate } from 'react-router-dom';
 import './home_module.css';
 
 function Home() {
-    const navigate = useNavigate(); // Atualize para useNavigate
+    const navigate = useNavigate();
 
     return (
         <div className="home-wrapper">

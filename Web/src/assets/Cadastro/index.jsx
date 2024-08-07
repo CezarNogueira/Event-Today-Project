@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Atualize a importação
+import { useNavigate } from 'react-router-dom';
 import './cadastro_module.css';
 
 function Cadastro() {
-    const navigate = useNavigate(); // Atualize para useNavigate
+    const navigate = useNavigate();
     const [formDados, setFormDados] = useState({
         nome_usuario: '',
         cpf_usuario: '',
@@ -13,6 +13,10 @@ function Cadastro() {
     });
 
     const [mensagem, setMensagem] = useState('');
+
+    const handleBackClick = () => {
+        navigate('/');
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -85,14 +89,17 @@ function Cadastro() {
 
                             <div className="input-box">
                                 <label htmlFor="senha_usuario">Senha</label>
-                                <input type="text" name="senha_usuario" value={formDados.senha_usuario} onChange={handleChange} minLength='6' maxLength='200' required/>
+                                <input type="password" name="senha_usuario" value={formDados.senha_usuario} onChange={handleChange} minLength='6' maxLength='200' required/>
                             </div>
                         </div>
 
-                        <div className='confirm-button'>
+                        <div className='confirm-button-register'>
                             <button type='submit'>Confirmar</button>
                         </div>
                     </form>
+                    <div className='back-button-register'>
+                        <button onClick={handleBackClick}>Voltar</button>
+                    </div>
                 </div>
             </div>
         </div>
