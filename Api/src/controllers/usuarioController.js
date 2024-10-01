@@ -59,7 +59,7 @@ export async function updateUsuario(req, res) {
 // Realizar Desativação (DELETE)
 export async function deleteUsuario(req, res) {
     const { id } = req.params;
-    deleteU(id, (err, result) => {
+    deleteU(id, (err) => {
         if(err) {
             res.status(500).json({ error: err.message });
             return;

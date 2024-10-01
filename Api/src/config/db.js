@@ -1,18 +1,15 @@
-import { createConnection } from "mysql2";
+import { createPool } from "mysql2/promise";
 
-const connection = createConnection({
+const connection = createPool({
     host: "localhost",
     user: "root",
     password: "root",
     database: "event_database"
 });
 
-connection.connect((err) => {
-    if (err) {
-        console.error("Erro ao realizar conexão com o DB:", err);
-        throw err;
-    }
-    console.log("Conexão com o BD estabelecida com sucesso!");
-});
+async function getUserById(id) {
+    const [rows] = await connection.query('SELECT * FROM usuario WHERE idusuario = ?', [id]);
+    return rows[0];
+}
 
-export default connection;
+export { getUserById, connection };
