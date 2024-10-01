@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Home from './assets/Home';
-import Cadastro from './assets/Cadastro';
-import Login from './assets/Login';
-import Menu from './assets/Menu';
-import Create from './assets/Create';
+import Home from './assets/pages/Home';
+import Cadastro from './assets/pages/Cadastro';
+import Login from './assets/pages/Login';
+import Menu from './assets/pages/Menu';
+import Create from './assets/pages/Create';
 import SucessIngresso from './assets/Resolver/pages/ingresso.jsx';
-import Control from './assets/Control/index.jsx';
+import Control from './assets/pages/Control';
 import PrivateRoute from './assets/routes/PrivateRoute.jsx';
 import { AuthProvider } from './assets/routes/AuthContext.jsx';
 
