@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Atualize a importação
-import './menu_module.css';
-import UserInfo from '../../components/UserInfo';
+import './Menu.css';
+import UserInfo from '../../components/UserInfo/UserInfo.jsx';
 
 function Menu() {
     const navigate = useNavigate(); // Atualize para useNavigate

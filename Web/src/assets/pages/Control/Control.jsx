@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './control_module.css';
-import Navbar from '../../components/Navbar';
+import './Control.css';
+import Navbar from '../../components/Navbar/Navbar.jsx';
 
 function Control() {
     const navigate = useNavigate();

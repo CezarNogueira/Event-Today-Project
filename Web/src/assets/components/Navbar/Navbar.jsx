@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './navbar_module.css';
+import './Navbar.css';
 import { FaArrowLeft } from "react-icons/fa";
 
 function Navbar() {

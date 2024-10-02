@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './cadastro_module.css';
+import { useNavigate } from 'react-router-dom'; // Atualize para useNavigate
+import './Login.css';
 
-function Cadastro() {
-    const navigate = useNavigate();
+function Login() {
+    const navigate = useNavigate(); // Atualize para useNavigate
     const [formDados, setFormDados] = useState({
-        nome_usuario: '',
-        cpf_usuario: '',
-        idade_usuario: '',
         email_usuario: '',
         senha_usuario: ''
     });
@@ -31,7 +28,7 @@ function Cadastro() {
 
         try {
             console.log("Dados a serem enviados:", formDados);
-            const response = await fetch('http://localhost:3000/auth/register', {
+            const response = await fetch('http://localhost:3000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,11 +41,15 @@ function Cadastro() {
             }
 
             const json = await response.json();
-            localStorage.setItem('nome_usuario', formDados.nome_usuario);
+            localStorage.setItem('token', json.token); // Salva o token
+            localStorage.setItem('nome_usuario', json.nome_usuario); // Salva o nome do usuário
+            console.log("Token salvo:", localStorage.getItem('token'));
             console.log(response);
             console.log(json);
-            setMensagem('Cadastro realizado com sucesso!');
-            navigate('/login'); // Atualize para usar navigate
+            setMensagem('Login realizado com sucesso!');
+            
+            // Redireciona para a página de menu após login bem-sucedido
+            navigate('/menu'); // Atualize para usar navigate
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
@@ -56,48 +57,50 @@ function Cadastro() {
     };
 
     return (
-        <div className="cadastro_container">
-            <div className="cadastro_wrapper">
+        <div className="login_container">
+            <div className="login_wrapper">
                 <div className="form"> 
                     <form onSubmit={handleSubmit}>
                         <div className="form-header">
                             <div className="title">
-                                <h1>CADASTRO</h1>
+                                <h1>LOGIN</h1>
                             </div>
                         </div>
 
                         <div className="input-group">
                             <div className="input-box">
-                                <label htmlFor="nome_usuario">Nome</label>
-                                <input type="text" name="nome_usuario" value={formDados.nome_usuario} onChange={handleChange} maxLength='250' required/>
-                            </div>
-
-                            <div className="input-box">
-                                <label htmlFor="cpf_usuario">CPF</label>
-                                <input type="text" name="cpf_usuario" value={formDados.cpf_usuario} onChange={handleChange} maxLength='14' required/>
-                            </div>
-
-                            <div className="input-box">
-                                <label htmlFor="idade_usuario">Idade</label>
-                                <input type="text" name="idade_usuario" value={formDados.idade_usuario} onChange={handleChange} maxLength='3' required/>
-                            </div>
-
-                            <div className="input-box">
                                 <label htmlFor="email_usuario">E-mail</label>
-                                <input type="text" name="email_usuario" value={formDados.email_usuario} onChange={handleChange} maxLength='200' required/>
+                                <input 
+                                    type="text" 
+                                    name="email_usuario" 
+                                    value={formDados.email_usuario} 
+                                    onChange={handleChange} 
+                                    maxLength='200' 
+                                    required 
+                                />
                             </div>
 
                             <div className="input-box">
                                 <label htmlFor="senha_usuario">Senha</label>
-                                <input type="password" name="senha_usuario" value={formDados.senha_usuario} onChange={handleChange} minLength='6' maxLength='200' required/>
+                                <input 
+                                    type="password" 
+                                    name="senha_usuario" 
+                                    value={formDados.senha_usuario} 
+                                    onChange={handleChange} 
+                                    minLength='6' 
+                                    maxLength='200' 
+                                    required 
+                                />
                             </div>
                         </div>
 
-                        <div className='confirm-button-register'>
+                        <div className='confirm-button-login'>
                             <button type='submit'>Confirmar</button>
                         </div>
+
+                        {mensagem && <p className="mensagem">{mensagem}</p>}
                     </form>
-                    <div className='back-button-register'>
+                    <div className='back-button-login'>
                         <button onClick={handleBackClick}>Voltar</button>
                     </div>
                 </div>
@@ -106,4 +109,4 @@ function Cadastro() {
     );
 }
 
-export default Cadastro;
+export default Login;
