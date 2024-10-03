@@ -4,20 +4,20 @@ import './Menu.css';
 import UserInfo from '../../components/UserInfo/UserInfo.jsx';
 
 function Menu() {
-    const navigate = useNavigate(); // Atualize para useNavigate
+    const navigate = useNavigate(); // Para useNavigate
 
     const handleCreateClick = () => {
-        navigate('/create'); // Atualize para usar navigate
+        navigate('/create'); // Para usar navigate
     };
 
     const handleControlClick = () => {
-        navigate('/control'); // Atualize para usar navigate
+        navigate('/control'); // Para usar navigate
     };
 
     const handleLogoffClick = () => {
         localStorage.removeItem('nome_usuario');
         localStorage.removeItem('token');
-        navigate('/'); // Atualize para usar navigate e redirecionar para a página inicial
+        navigate('/'); // Para usar navigate e redirecionar para a página inicial
     };
 
     return (

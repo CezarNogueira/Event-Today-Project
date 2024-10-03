@@ -1,4 +1,4 @@
-import connection from "../config/db.js";
+import { connection } from "../config/db.js";
 
     //Metodo responsavel por realizar a leitura (se ativo = 1)
     export function read(callback) {
