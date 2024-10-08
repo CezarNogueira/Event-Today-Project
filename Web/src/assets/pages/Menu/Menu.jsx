@@ -1,23 +1,23 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Atualize a importação
+import { useNavigate } from 'react-router-dom';
 import './Menu.css';
 import UserInfo from '../../components/UserInfo/UserInfo.jsx';
 
 function Menu() {
-    const navigate = useNavigate(); // Para useNavigate
+    const navigate = useNavigate();
 
     const handleCreateClick = () => {
-        navigate('/create'); // Para usar navigate
+        navigate('/create');
     };
 
     const handleControlClick = () => {
-        navigate('/control'); // Para usar navigate
+        navigate('/control');
     };
 
     const handleLogoffClick = () => {
         localStorage.removeItem('nome_usuario');
         localStorage.removeItem('token');
-        navigate('/'); // Para usar navigate e redirecionar para a página inicial
+        navigate('/');
     };
 
     return (

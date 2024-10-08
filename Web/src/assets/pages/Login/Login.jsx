@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Atualize para useNavigate
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
-    const navigate = useNavigate(); // Atualize para useNavigate
+    const navigate = useNavigate();
     const [formDados, setFormDados] = useState({
         email_usuario: '',
         senha_usuario: ''
@@ -47,7 +47,7 @@ function Login() {
             console.log(response);
             console.log(json);
             setMensagem('Login realizado com sucesso!');
-            
+
             // Redireciona para a página de menu após login bem-sucedido
             navigate('/menu'); // Atualize para usar navigate
         } catch (err) {

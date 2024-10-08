@@ -1,15 +1,12 @@
-import { createPool } from "mysql2/promise";
+import { createConnection } from "mysql2";
 
-const connection = createPool({
+const connection = createConnection({
     host: "localhost",
     user: "root",
     password: "root",
     database: "event_database"
 });
 
-async function getUserById(id) {
-    const [rows] = await connection.query('SELECT * FROM usuario WHERE idusuario = ?', [id]);
-    return rows[0];
-}
 
-export { getUserById, connection };
+
+export default connection;
