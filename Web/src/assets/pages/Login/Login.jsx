@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 import './Login.css';
 
 function Login() {
@@ -10,6 +12,12 @@ function Login() {
     });
 
     const [mensagem, setMensagem] = useState('');
+
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+
+    const toggleMostrarSenha = () => {
+        setMostrarSenha(!mostrarSenha);
+    };
 
     const handleBackClick = () => {
         navigate('/');
@@ -82,15 +90,20 @@ function Login() {
 
                             <div className="input-box">
                                 <label htmlFor="senha_usuario">Senha</label>
-                                <input 
-                                    type="password" 
-                                    name="senha_usuario" 
-                                    value={formDados.senha_usuario} 
-                                    onChange={handleChange} 
-                                    minLength='6' 
-                                    maxLength='200' 
-                                    required 
-                                />
+                                <div className='password-input'>
+                                    <input 
+                                        type={mostrarSenha ? "text" : "password"} 
+                                        name="senha_usuario" 
+                                        value={formDados.senha_usuario} 
+                                        onChange={handleChange} 
+                                        minLength='6' 
+                                        maxLength='200' 
+                                        required 
+                                    />
+                                    <button type="button" className='eye-password' onClick={toggleMostrarSenha}>
+                                        {mostrarSenha ? <FaRegEyeSlash /> : <FaRegEye />}
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

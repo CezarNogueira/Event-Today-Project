@@ -58,7 +58,7 @@
 }
 
 .input-box input {
-    width: 75%;
+    width: 100%;
     padding: 0.8rem 1.2rem;
     border: none;
     border-radius: 10px;
@@ -79,6 +79,29 @@
     font-size: 0.9rem;
     font-weight: 600;
     color: #000000c0;
+}
+
+.password-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.eye-password {
+    position: absolute;
+    margin-left: 68%;
+    display: flex;
+    background: none; 
+    border: none;
+    cursor: pointer; 
+    z-index: 1; 
+    color: #888; 
+}
+
+.eye-password:focus {
+    outline: none; 
 }
 
 .confirm-button-login {
