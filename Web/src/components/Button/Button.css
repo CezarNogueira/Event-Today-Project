@@ -1,0 +1,19 @@
+button {
+    background-color: #303030;
+    font-family: 'Segoe UI';
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-size: 1.2em;
+    border-radius: 10px;
+    height: 6vh;
+    padding: 1.5% 6%;
+    max-width: 140px;
+    max-height: 48px;
+    cursor: pointer;
+    transition: all 0.4s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
