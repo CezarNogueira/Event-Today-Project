@@ -6,6 +6,8 @@ export default function Button() {
     const navigate = useNavigate();
 
     return (
-        <button onClick={() => navigate('/login')} className="login-button">Login</button>
+        <button onClick={() => navigate(to)} className={className}>
+            {children}
+        </button>
     );
 }
