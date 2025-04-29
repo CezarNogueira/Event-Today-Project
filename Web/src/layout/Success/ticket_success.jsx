@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../sucess_module.css';
-import Navbar from '../../../components/Navbar/Navbar.jsx';
+import './ticket_success.css';
+import Navbar from '../../components/Navbar/Navbar.jsx';
 
-function SucessIngresso() {
+function TicketSuccess() {
     const navigate = useNavigate();
 
     const handleBackClick = () => {
@@ -11,9 +11,9 @@ function SucessIngresso() {
     };
 
     return (
-        <div className="sucess_container">
+        <div className="success_container">
             <Navbar />
-            <div className="sucess_wrapper">
+            <div className="success_wrapper">
                 <div className="title">
                     <h1>Ingresso Criado com Sucesso!</h1>
                 </div>
@@ -25,4 +25,4 @@ function SucessIngresso() {
     );
 }
 
-export default SucessIngresso;
+export default TicketSuccess;

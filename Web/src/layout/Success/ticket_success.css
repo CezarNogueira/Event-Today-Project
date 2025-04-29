@@ -1,4 +1,5 @@
-.sucess_container {
+
+.success_container {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,7 +8,7 @@
     background-color: #F2F2F2;
 }
 
-.sucess_wrapper {
+.success_wrapper {
     width: 95%;
     max-width: 840px;
     height: 90%;
