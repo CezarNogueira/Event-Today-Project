@@ -106,16 +106,17 @@ function Login() {
                                 </div>
                             </div>
                         </div>
-
-                        <div className='confirm-button-login'>
-                            <button type='submit'>Confirmar</button>
+                        <div className='login-buttons-wrapper'>
+                            <div className='confirm-button-login'>
+                                <button type='submit'>Confirmar</button>
+                            </div>
+                            <div className='back-button-login'>
+                                <button onClick={handleBackClick}>Voltar</button>
+                            </div>
                         </div>
 
                         {mensagem && <p className="mensagem">{mensagem}</p>}
                     </form>
-                    <div className='back-button-login'>
-                        <button onClick={handleBackClick}>Voltar</button>
-                    </div>
                 </div>
             </div>
         </div>
