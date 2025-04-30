@@ -92,12 +92,13 @@ function Cadastro() {
                                 <input type="password" name="senha_usuario" value={formDados.senha_usuario} onChange={handleChange} minLength='6' maxLength='200' required/>
                             </div>
                         </div>
-
-                        <div className='confirm-button-register'>
-                            <button type='submit'>Confirmar</button>
-                        </div>
-                        <div className='back-button-register'>
-                            <button onClick={handleBackClick}>Voltar</button>
+                        <div className='form-buttons-wrapper'>
+                            <div className='confirm-button-register'>
+                                <button type='submit'>Confirmar</button>
+                            </div>
+                            <div className='back-button-register'>
+                                <button onClick={handleBackClick}>Voltar</button>
+                            </div>
                         </div>
                     </form>
                 </div>
