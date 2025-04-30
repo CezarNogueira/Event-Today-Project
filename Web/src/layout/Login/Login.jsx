@@ -106,7 +106,7 @@ function Login() {
                                 </div>
                             </div>
                         </div>
-                        <div className='login-buttons-wrapper'>
+                        <div className='form-buttons-wrapper'>
                             <div className='confirm-button-login'>
                                 <button type='submit'>Confirmar</button>
                             </div>

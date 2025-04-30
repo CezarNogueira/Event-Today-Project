@@ -96,10 +96,10 @@ function Cadastro() {
                         <div className='confirm-button-register'>
                             <button type='submit'>Confirmar</button>
                         </div>
+                        <div className='back-button-register'>
+                            <button onClick={handleBackClick}>Voltar</button>
+                        </div>
                     </form>
-                    <div className='back-button-register'>
-                        <button onClick={handleBackClick}>Voltar</button>
-                    </div>
                 </div>
             </div>
         </div>
