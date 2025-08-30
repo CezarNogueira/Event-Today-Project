@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import API_URL from '../../config.js';
 import './Create.css';
 import Navbar from '../../components/Navbar/Navbar.jsx';
 
@@ -51,7 +52,9 @@ function Create() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const method = cardId ? 'PUT' : 'POST';
-        const url = cardId ? `http://localhost:3000/events/${cardId}` : 'http://localhost:3000/events/create';
+        const url = cardId 
+            ? `${API_URL}/ingresso/${cardId}` 
+            : `${API_URL}/ingresso`;
 
         try {
             const response = await fetch(url, {

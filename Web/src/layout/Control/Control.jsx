@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Control.css';
 import Navbar from '../../components/Navbar/Navbar.jsx';
+import { API_URL } from '../../config.js';
 
 function Control() {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ function Control() {
 
     const fetchData = async () => {
         try {
+            // Usa a constante API_URL para buscar os dados
             const response = await fetch(`${API_URL}/ingresso`, {
                 method: 'GET',
                 headers: {
@@ -47,37 +49,37 @@ function Control() {
     };
 
     const handleClick = (id) => {
+        setSelecionarCard(id);
         toggleItem(id);
-        console.log("Card clicado:", id);
-        setSelecionarCard(selecionarCard === id ? null : id);
-    };
-
-    const handleDelete = async () => {
-        if (selecionarCard) {
-            try {
-                const response = await fetch(`http://localhost:3000/ingresso/${selecionarCard}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                const json = await response.json();
-                console.log(response);
-                console.log(json);
-                setSelecionarCard(null);
-                atualizarTela();
-            } catch (err) {
-                console.log('Erro ao excluir', err);
-            }
-        }
     };
 
     const handleEdit = () => {
-        console.log("SelecionarCard:", selecionarCard);
         if (selecionarCard) {
             navigate('/create', { state: { cardId: selecionarCard } });
         } else {
-            console.log("Nenhum card selecionado para editar.");
+            console.log('Nenhum card selecionado para edição.');
+        }
+    };
+    
+    const handleDelete = async () => {
+        if (selecionarCard) {
+            try {
+                const response = await fetch(`${API_URL}/ingresso/${selecionarCard}`, {
+                    method: 'DELETE',
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                }
+
+                console.log('Ingresso deletado com sucesso!');
+                setSelecionarCard(null);
+                atualizarTela();
+            } catch (err) {
+                console.log('Erro ao deletar ingresso', err);
+            }
+        } else {
+            console.log('Nenhum card selecionado para exclusão.');
         }
     };
 
@@ -86,10 +88,11 @@ function Control() {
             <Navbar />
             <div className='edit_wrapper'>
                 <div className='edit-content'>
+                    <h2 className='title'>Gerenciamento</h2>
                     <ol className='data-table'>
                         {consultarDados.map((linha) => (
-                            <li key={linha.idingresso}>
-                                <div className='accordion' onClick={() => handleClick(linha.idingresso)}>
+                            <li key={linha.idingresso} className={selecionarCard === linha.idingresso ? 'selected' : ''}>
+                                <div className='accordion' data-cardName='accordion' onClick={() => handleClick(linha.idingresso)}>
                                 <span>Nome: {linha.nome_ingresso}</span>
                                 </div>
                                 {openItems[linha.idingresso] && (
@@ -99,6 +102,8 @@ function Control() {
                                         <span>Preço: {linha.preco_ingresso}</span>
                                         <span>Quantidade: {linha.qtd_ingresso}</span>
                                         <span>Data: {linha.data_ingresso}</span>
+                                        <span>Local: {linha.local_ingresso}</span>
+                                        <span>Descrição: {linha.desc_ingresso}</span>
                                     </div>
                                 )}
                             </li>
