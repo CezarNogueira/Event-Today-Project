@@ -22,7 +22,7 @@ function Create() {
         if (cardId) {
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`${API_URL}/events/${cardId}`);
+                    const response = await fetch(`${API_URL}/ingresso/${cardId}`);
                     if (!response.ok) {
                         throw new Error(`Erro: ${response.status} - ${response.statusText}`);
                     }
@@ -38,7 +38,7 @@ function Create() {
                 }
             };
             fetchData();
-        }
+        } 
     }, [cardId]);
 
     const handleChange = (e) => {
