@@ -12,7 +12,7 @@ function Control() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/ingresso', {
+            const response = await fetch(`${API_URL}/ingresso`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

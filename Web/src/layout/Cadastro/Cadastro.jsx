@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../../config.js';
 import './Cadastro.css';
 
 function Cadastro() {
@@ -31,7 +32,7 @@ function Cadastro() {
 
         try {
             console.log("Dados a serem enviados:", formDados);
-            const response = await fetch('http://localhost:3000/auth/register', {
+            const response = await fetch( `${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

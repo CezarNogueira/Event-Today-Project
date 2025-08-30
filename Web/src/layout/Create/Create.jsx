@@ -21,7 +21,7 @@ function Create() {
         if (cardId) {
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/events/${cardId}`);
+                    const response = await fetch(`${API_URL}/events/${cardId}`);
                     if (!response.ok) {
                         throw new Error(`Erro: ${response.status} - ${response.statusText}`);
                     }
