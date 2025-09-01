@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import API_URL from '../../config.js';
 import './Create.css';
 import Navbar from '../../components/Navbar/Navbar.jsx';
+import { API_URL } from '../../config.js';
 
 function Create() {
     const navigate = useNavigate();

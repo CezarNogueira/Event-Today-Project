@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import API_URL from '../../config.js';
 import './Login.css';
+import { API_URL } from '../../config.js';
 
 function Login() {
     const navigate = useNavigate();

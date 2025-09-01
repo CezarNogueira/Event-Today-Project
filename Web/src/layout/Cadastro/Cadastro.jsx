@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API_URL from '../../config.js';
 import './Cadastro.css';
+import { API_URL } from '../../config.js';
 
 function Cadastro() {
     const navigate = useNavigate();
