@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Create.css';
 import Navbar from '../../components/Navbar/Navbar.jsx';
+import { API_URL } from '../../config.js';
 
 function Create() {
     const navigate = useNavigate();
@@ -12,7 +13,11 @@ function Create() {
         event_name: '',
         event_date: '',
         event_location: '',
-        event_description: ''
+        event_description: '',
+        ticket_type: '',
+        ticket_price: '',
+        ticket_amount: '',
+        ativo_ingresso: ''
     });
 
     const [mensagem, setMensagem] = useState('');
@@ -21,7 +26,7 @@ function Create() {
         if (cardId) {
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/events/${cardId}`);
+                    const response = await fetch(`${API_URL}/ingresso/${cardId}`);
                     if (!response.ok) {
                         throw new Error(`Erro: ${response.status} - ${response.statusText}`);
                     }
@@ -37,7 +42,7 @@ function Create() {
                 }
             };
             fetchData();
-        }
+        } 
     }, [cardId]);
 
     const handleChange = (e) => {
@@ -51,7 +56,9 @@ function Create() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const method = cardId ? 'PUT' : 'POST';
-        const url = cardId ? `http://localhost:3000/events/${cardId}` : 'http://localhost:3000/events/create';
+        const url = cardId 
+            ? `${API_URL}/ingresso/${cardId}` 
+            : `${API_URL}/ingresso`;
 
         try {
             const response = await fetch(url, {
@@ -74,6 +81,31 @@ function Create() {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
         }
+    };
+
+    // formatador de moeda
+    const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+    // função de preço movida para dentro do componente
+    const handlePriceChange = (e) => {
+        let value = e.target.value;
+
+        value = value.replace(/\D/g, "");
+
+        if (value === "") {
+            setFormDados((prev) => ({ ...prev, ticket_price: "" }));
+            return;
+        }
+
+        const numericValue = Number(value) / 100;
+        
+        setFormDados((prev) => ({
+            ...prev,
+            ticket_price: currencyFormatter.format(numericValue),
+        }));
     };
 
     return (
@@ -107,6 +139,21 @@ function Create() {
                             <div className="input-box">
                                 <label htmlFor="event_description">Descrição do Evento</label>
                                 <input name="event_description" value={formDados.event_description} onChange={handleChange} maxLength='500' required/>
+                            </div>
+
+                            <div className="input-box">
+                                <label htmlFor="ticket_type">Tipo do Ingresso</label>
+                                <input type="text" name="ticket_type" value={formDados.ticket_type} onChange={handleChange} maxLength='250' required/>
+                            </div>
+
+                            <div className="input-box">
+                                <label htmlFor="ticket_price">Preço do Ingresso</label>
+                                <input type="text" name="ticket_price" value={formDados.ticket_price} onChange={handlePriceChange} maxLength='250' required/>
+                            </div>
+
+                            <div className="input-box">
+                                <label htmlFor="ticket_amount">Quantidade de Ingressos</label>
+                                <input type="number" name="ticket_amount" value={formDados.ticket_amount} onChange={handleChange} maxLength='250' required/>
                             </div>
                         </div>
 
