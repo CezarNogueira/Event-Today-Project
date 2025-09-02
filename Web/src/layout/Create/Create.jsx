@@ -13,7 +13,11 @@ function Create() {
         event_name: '',
         event_date: '',
         event_location: '',
-        event_description: ''
+        event_description: '',
+        ticket_type: '',
+        ticket_price: '',
+        ticket_amount: '',
+        ativo_ingresso: ''
     });
 
     const [mensagem, setMensagem] = useState('');
@@ -79,6 +83,31 @@ function Create() {
         }
     };
 
+    // formatador de moeda
+    const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+    // função de preço movida para dentro do componente
+    const handlePriceChange = (e) => {
+        let value = e.target.value;
+
+        value = value.replace(/\D/g, "");
+
+        if (value === "") {
+            setFormDados((prev) => ({ ...prev, ticket_price: "" }));
+            return;
+        }
+
+        const numericValue = Number(value) / 100;
+        
+        setFormDados((prev) => ({
+            ...prev,
+            ticket_price: currencyFormatter.format(numericValue),
+        }));
+    };
+
     return (
         <div className="create_container">
             <Navbar />
@@ -110,6 +139,21 @@ function Create() {
                             <div className="input-box">
                                 <label htmlFor="event_description">Descrição do Evento</label>
                                 <input name="event_description" value={formDados.event_description} onChange={handleChange} maxLength='500' required/>
+                            </div>
+
+                            <div className="input-box">
+                                <label htmlFor="ticket_type">Tipo do Ingresso</label>
+                                <input type="text" name="ticket_type" value={formDados.ticket_type} onChange={handleChange} maxLength='250' required/>
+                            </div>
+
+                            <div className="input-box">
+                                <label htmlFor="ticket_price">Preço do Ingresso</label>
+                                <input type="text" name="ticket_price" value={formDados.ticket_price} onChange={handlePriceChange} maxLength='250' required/>
+                            </div>
+
+                            <div className="input-box">
+                                <label htmlFor="ticket_amount">Quantidade de Ingressos</label>
+                                <input type="number" name="ticket_amount" value={formDados.ticket_amount} onChange={handleChange} maxLength='250' required/>
                             </div>
                         </div>
 

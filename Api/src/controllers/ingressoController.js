@@ -10,9 +10,9 @@ export async function createIngresso(req, res) {
         data_ingresso: incomingData.event_date,
         local_ingresso: incomingData.event_location,
         desc_ingresso: incomingData.event_description,
-        tipo_ingresso: incomingData.tipo_ingresso || 'Padrão',
-        preco_ingresso: incomingData.preco_ingresso || 0,
-        qtd_ingresso: incomingData.qtd_ingresso || 0,
+        tipo_ingresso: incomingData.ticket_type || 'Padrão',
+        preco_ingresso: incomingData.ticket_price || 0,
+        qtd_ingresso: incomingData.ticket_amount || 0,
         ativo_ingresso: incomingData.ativo_ingresso || 1 
     };
 
@@ -42,9 +42,23 @@ export async function getAllIngresso(req, res) {
 //Realizando Atualização (UPDATE)
 export async function updateIngresso(req, res) {
     const { id } = req.params;
-    const novosDados = req.body;
+    const incomingData = req.body;
+
+    // Mapeia os campos recebidos para os nomes do banco
+    const novosDados = {
+        nome_ingresso: incomingData.event_name,
+        data_ingresso: incomingData.event_date,
+        local_ingresso: incomingData.event_location,
+        desc_ingresso: incomingData.event_description,
+        tipo_ingresso: incomingData.ticket_type,
+        preco_ingresso: incomingData.ticket_price,
+        qtd_ingresso: incomingData.ticket_amount,
+        ativo_ingresso: incomingData.ativo_ingresso || 1
+    };
+
     update(id, novosDados, (err, result) => {
         if(err) {
+            res.json({ message: "Ingresso atualizado com sucesso" });
             res.status(500).json({ error: err.message });
             return;
         }
