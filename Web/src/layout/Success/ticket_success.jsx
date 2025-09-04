@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 import './ticket_success.css';
-import Navbar from '../../components/Navbar/Navbar.jsx';
 
-function TicketSuccess() {
+function TicketSuccess({ onClose }) {
     const navigate = useNavigate();
 
     const handleBackClick = () => {
@@ -11,15 +11,12 @@ function TicketSuccess() {
     };
 
     return (
-        <div className="success_container">
-            <Navbar />
-            <div className="success_wrapper">
-                <div className="title">
-                    <h1>Ingresso Criado com Sucesso!</h1>
-                </div>
-                <button onClick={handleBackClick} className="back-to-menu-button">
-                    Voltar para o Menu
-                </button>
+        <div className="modal-overlay">
+            <div className="modal-container">
+                <h1>✅ Ingresso Criado com Sucesso!</h1>
+                    <Button type='submit' onClick={handleBackClick} className="btn-primary">
+                        Ir para o Menu
+                    </Button>
             </div>
         </div>
     );

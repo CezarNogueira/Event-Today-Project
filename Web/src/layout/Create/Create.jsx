@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Create.css';
 import Navbar from '../../components/Navbar/Navbar.jsx';
+import TicketSuccess from '../Success/ticket_success.jsx';
+import Button from '../../components/Button/Button.jsx';
 import { API_URL } from '../../config.js';
 
 function Create() {
-    const navigate = useNavigate();
     const location = useLocation();
     const { cardId } = location.state || {};
 
@@ -21,6 +22,7 @@ function Create() {
     });
 
     const [mensagem, setMensagem] = useState('');
+    const [showSuccess, setShowSuccess] = useState(false);
 
     useEffect(() => {
         if (cardId) {
@@ -76,7 +78,7 @@ function Create() {
             const json = await response.json();
             console.log(json);
             setMensagem(cardId ? 'Evento atualizado com sucesso!' : 'Evento criado com sucesso!');
-            navigate('/menu');
+            setShowSuccess(true);
         } catch (err) {
             console.error('Erro ao enviar', err);
             setMensagem('Erro ao enviar os dados. Por favor, tente novamente.');
@@ -158,10 +160,9 @@ function Create() {
                         </div>
 
                         <div className='confirm-button'>
-                            <button type='submit'>Confirmar</button>
+                            <Button type='submit' className='btn-primary'>Confirmar</Button>
                         </div>
-
-                        {mensagem && <p className="mensagem">{mensagem}</p>}
+                        {showSuccess && <TicketSuccess onClose={() => setShowSuccess(false)} />}
                     </form>
                 </div>
             </div>
